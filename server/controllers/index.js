@@ -370,7 +370,7 @@ const updateLast = (req, res) => {
   savePromise.then(() => res.json({ name: lastAdded.name, beds: lastAdded.bedsOwned }));
 
   // if save error, just return an error for now
-  savePromise.catch((err) => res.status(500).json({ err }));
+  savePromise.catch((e) => res.status(500).json({ e }));
 };
 
 // function to handle a request to any non-real resources (404)
