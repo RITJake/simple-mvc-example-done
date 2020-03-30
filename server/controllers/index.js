@@ -341,7 +341,7 @@ const searchDogName = (req, res) => {
     savePromise.then(() => res.json({ name: dog.name, breed: dog.breed, age: dog.age }));
 
     // if save error, just return an error for now
-    savePromise.catch((err) => res.status(500).json({ err }));
+    savePromise.catch((e) => res.status(500).json({e}));
     // if a match, send the match back
     return res.json({ name: doc.name, breed: doc.breed, age: dog.age });
   });
@@ -370,7 +370,7 @@ const updateLast = (req, res) => {
   savePromise.then(() => res.json({ name: lastAdded.name, beds: lastAdded.bedsOwned }));
 
   // if save error, just return an error for now
-  savePromise.catch((e) => res.status(500).json({ e }));
+  savePromise.catch((err) => res.status(500).json({ err }));
 };
 
 // function to handle a request to any non-real resources (404)
