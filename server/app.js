@@ -7,7 +7,7 @@ const express = require('express');
 const compression = require('compression');
 // favicon library to handle favicon requests
 const favicon = require('serve-favicon');
- // Library to parse cookies from the requests
+// Library to parse cookies from the requests
 const cookieParser = require('cookie-parser');
 // library to handle POST requests any information sent in an HTTP body
 const bodyParser = require('body-parser');
@@ -27,11 +27,15 @@ const router = require('./router.js');
 // The string after mongodb://localhost is the database name. It can be anything you want.
 const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/simpleMVCExample';
 
+const mongooseOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
 // call mongoose's connect function and pass in the url.
 // If there are any errors connecting, we will throw it and kill the server.
 // Once connected, the mongoose package will stay connected for every file
 // that requires it in this project
-mongoose.connect(dbURL, (err) => {
+mongoose.connect(dbURL, mongooseOptions, (err) => {
   if (err) {
     console.log('Could not connect to database');
     throw err;
@@ -87,10 +91,9 @@ router(app);
 
 // Tell the app to listen on the specified port
 app.listen(port, (err) => {
-    // if the app fails, throw the err
+  // if the app fails, throw the err
   if (err) {
     throw err;
   }
   console.log(`Listening on port ${port}`);
 });
-
